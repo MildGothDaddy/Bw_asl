@@ -12,11 +12,83 @@ init {
 
     /*
         Map names:
-        CHECKINROOM.geo
-        HQBW.geo
-        BURKTOWN.geo
-        ...
-        ADD MORE HERE
+Prologue
+CHECKINROOM (spawn room)
+HQBW (headquarters)
+
+Day 1
+BURKTOWN (main town)
+M1INSIDE (inn keeper)
+M2INSIDE (your motel room)
+BURKTOWN
+DNINSIDE (diner)
+M2INSIDE
+BURKTOWN
+THALLINSIDE (town hall)
+BURKTOWN
+CHINSIDE (church)
+BURKTOWN
+
+Day 2
+M2INSIDE
+BURKTOWN
+THALLINSIDE
+BURKTOWN
+DNINSIDE
+BURKTOWN
+THALLINSIDE
+SCHINSIDE (school)
+BURKTOWN
+M2INSIDE
+BURKTOWN
+RWHOUSE (path between town and forest)
+TOWNLOOP (forest entrance section)
+GENLOOP (bottom right forest)
+AZLOOP (asgaya/middle forest)
+PARRLOOP (left forest)
+PARRHOUSE (parrs house)
+PARRLOOP
+DKPLOOP (nighttime forest)
+PARRLOOP
+GENLOOP
+AZLOOP
+AZCABIN (asgaya cabin)
+AZLOOP
+PARRLOOP
+AZLOOP
+GENLOOP
+TOWNLOOP
+BURKTOWN (loading screen???)
+RWHOUSE
+
+Day 3
+M2INSIDE
+BURKTOWN
+M1INSIDE
+BURKTOWN
+LIBINSIDE (library)
+BURKTOWN
+M1INSIDE
+BURKTOWN
+M2INSIDE
+BURKTOWN
+RWHOUSE
+TOWNLOOP
+GENLOOP
+AZLOOP
+AZCABIN
+AZLOOP
+PARRLOOP
+NEVLOOP (forest after parrs twana)
+NEVURGIVN (parrs house after parrs twana)
+NEVLOOP
+PARRLOOP
+DKPLOOP
+GENLOOP
+AZLOOP
+AZCABIN
+AZLOOP
+
     */
 }
 
