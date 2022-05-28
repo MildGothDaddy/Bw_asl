@@ -12,11 +12,6 @@ init
     vars.StartMap = "CHECKINROOM.geo";
 }
 
-startup 
-{
-	print("STARTUP");
-}
-
 update 
 {
     // Debug for testing when the map changes
