@@ -22,7 +22,7 @@ update
 start 
 {
 	return current.geo != old.geo               // If the map has changed
-		&& current.geo == vars.StartRoom;       // And the current map is the first map of the run
+		&& current.geo == vars.StartMap;       // And the current map is the first map of the run
 }
 
 split 
