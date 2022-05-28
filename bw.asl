@@ -8,86 +8,86 @@
 state("nocturne", "Rustin Parr")
 {
 	string32 map: "nocturne.exe", 0x1BCF258;
-    
-    // All could be good candidates
-    bool isLoading: "nocturne.exe", 0x191BD28;
-    // bool isLoading: "nocturne.exe", 0x191BF4C;
-    // bool isLoading: "nocturne.exe", 0x191BF6C;
-    // bool isLoading: "nocturne.exe", 0x191C090;
+	
+	// All could be good candidates
+	bool isLoading: "nocturne.exe", 0x191BD28;
+	// bool isLoading: "nocturne.exe", 0x191BF4C;
+	// bool isLoading: "nocturne.exe", 0x191BF6C;
+	// bool isLoading: "nocturne.exe", 0x191C090;
 }
 
 state("blairwitch2", "Coffin Rock")
 {
-    // All could be good candidates (I believe these are the same values as in RP)
-    bool isLoading: "blairwitch2.exe", 0x190300C;
-    // bool isLoading: "blairwitch2.exe", 0x1903230;
-    // bool isLoading: "blairwitch2.exe", 0x1903250;
-    // bool isLoading: "blairwitch2.exe", 0x1903374; 
+	// All could be good candidates (I believe these are the same values as in RP)
+	bool isLoading: "blairwitch2.exe", 0x190300C;
+	// bool isLoading: "blairwitch2.exe", 0x1903230;
+	// bool isLoading: "blairwitch2.exe", 0x1903250;
+	// bool isLoading: "blairwitch2.exe", 0x1903374; 
 }
 
 state("bw3", "Elly Kedward")
 {
-    bool isLoading: "bw3.exe", 0x1970AC4;
+	bool isLoading: "bw3.exe", 0x1970AC4;
 }
 
 init 
 {
-    print("Nocturne game detected...");
+	print("Nocturne game detected...");
 
-    var mms = modules.First().ModuleMemorySize;
-    print("MMS: " + mms.ToString("X"));
+	var mms = modules.First().ModuleMemorySize;
+	print("MMS: " + mms.ToString("X"));
 
-    // I'm not sure if other versions of each volume exist or could be used
-    // for running
-    switch(mms)
-    {
-        case 0x28BF000: 
-            version = "Rustin Parr"; 
-            vars.StartMap = "CHECKINROOM.geo";
-            break;
-        case 0x22A1000:
-            version = "Coffin Rock";
-            break;
-        case 0x2945000:
-            version = "Elly Kedward";
-            break;
-        default:
-            version = "UNKNOWN";
-            break;
-    }
+	// I'm not sure if other versions of each volume exist or could be used
+	// for running
+	switch(mms)
+	{
+		case 0x28BF000: 
+			version = "Rustin Parr"; 
+			vars.StartMap = "CHECKINROOM.geo";
+			break;
+		case 0x22A1000:
+			version = "Coffin Rock";
+			break;
+		case 0x2945000:
+			version = "Elly Kedward";
+			break;
+		default:
+			version = "UNKNOWN";
+			break;
+	}
 
-    print("Game \"" + version + "\" detected.");
+	print("Game \"" + version + "\" detected.");
 }
 
 update 
 {
-    if(version == "UNKNOWN") return;
+	if(version == "UNKNOWN") return;
 
-    // Debug for testing
-    if(version == "Rustin Parr" && current.map != old.map) 
-    {
-        print("map: " + old.map + " -> " + current.map);
-    }
+	// Debug for testing
+	if(version == "Rustin Parr" && current.map != old.map) 
+	{
+		print("map: " + old.map + " -> " + current.map);
+	}
 
-    if(old.isLoading != current.isLoading)
-    {
-        print("isLoading: " + old.isLoading + " -> " + current.isLoading);
-    }
+	if(old.isLoading != current.isLoading)
+	{
+		print("isLoading: " + old.isLoading + " -> " + current.isLoading);
+	}
 }
 
 start 
 {
-    if(version == "Rustin Parr")
-    {
-        return old.isLoading && !current.isLoading  // If we just finished loading
-            && current.map == vars.StartMap;        // and the current map is the first map of the run
-    }
+	if(version == "Rustin Parr")
+	{
+		return old.isLoading && !current.isLoading  // If we just finished loading
+			&& current.map == vars.StartMap;        // and the current map is the first map of the run
+	}
 }
 
 isLoading
 {
-    // Does not count loads that load the main menu, this is a separate
-    // loading screen in all three games iirc
+	// Does not count loads that load the main menu, this is a separate
+	// loading screen in all three games iirc
 	return current.isLoading;
 }
 
