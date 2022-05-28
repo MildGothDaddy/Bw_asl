@@ -9,9 +9,36 @@ init {
 
     // The name of the first map, where to start.
     vars.StartMap = "CHECKINROOM.geo";
+}
 
-    /*
-        Map names:
+startup {
+	print("STARTUP");
+}
+
+update {
+    // Debug for testing when the map changes
+    if(current.geo != old.geo) {
+        print("PREVIOUS MAP: " + old.geo);
+        print("CURRENT MAP: " + current.geo);
+        print("");
+    }
+}
+
+start {
+	return current.geo != old.geo               // If the map has changed
+		&& current.geo.Equals(vars.StartRoom);  // And the current map is the first map of the run
+}
+
+split {
+	return current.geo != old.geo;              // Split when we change maps
+}
+
+isLoading{
+	return current.inGame == false;
+}
+
+/*
+Map names:
 Prologue
 CHECKINROOM (spawn room)
 HQBW (headquarters)
@@ -112,34 +139,4 @@ AZLOOP
 PARRLOOP
 CHOONLOOP (final section)
 PARRLOOP (cutscenes before credits)
-
-
-    */
-}
-
-startup {
-	print("STARTUP");
-}
-
-update {
-    // Debug for testing when the map changes
-    if(current.geo != old.geo) {
-        print("PREVIOUS MAP: " + old.geo);
-        print("CURRENT MAP: " + current.geo);
-        print("");
-    }
-}
-
-start {
-	return current.geo != old.geo               // If the map has changed
-		&& current.geo.Equals(vars.StartRoom);  // And the current map is the first map of the run
-}
-
-split {
-	return current.geo != old.geo;              // Split when we change maps
-}
-
-isLoading{
-	return current.inGame == false;
-}
-
+*/
