@@ -4,18 +4,21 @@ state("nocturne")
 	bool inGame: "nocturne.exe", 0x2899314;
 }
 
-init {
+init 
+{
 	print("INIT");	
 
     // The name of the first map, where to start.
     vars.StartMap = "CHECKINROOM.geo";
 }
 
-startup {
+startup 
+{
 	print("STARTUP");
 }
 
-update {
+update 
+{
     // Debug for testing when the map changes
     if(current.geo != old.geo) {
         print("PREVIOUS MAP: " + old.geo);
@@ -24,16 +27,19 @@ update {
     }
 }
 
-start {
+start 
+{
 	return current.geo != old.geo               // If the map has changed
 		&& current.geo == vars.StartRoom;       // And the current map is the first map of the run
 }
 
-split {
+split 
+{
 	return current.geo != old.geo;              // Split when we change maps
 }
 
-isLoading{
+isLoading
+{
 	return current.inGame == false;
 }
 
