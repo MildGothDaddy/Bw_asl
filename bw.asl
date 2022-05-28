@@ -6,9 +6,6 @@ state("nocturne")
 
 init 
 {
-	print("INIT");	
-
-    // The name of the first map, where to start.
     vars.StartMap = "CHECKINROOM.geo";
 }
 
