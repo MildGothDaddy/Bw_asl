@@ -1,8 +1,9 @@
 /* The Blair Witch Volumes are three games written in the same engine (Nocturne)
    by three different developers. They all share a single page on speedrun.com.
-   Volume 1: Rustin Parr
-   Volume 2: The Legend of Coffin Rock
-   Volume 3: The Elly Kedward Tale
+   and were all released in 2000.
+   Volume 1: Rustin Parr                    [Terminal Reality]
+   Volume 2: The Legend of Coffin Rock      [Human Head Studios]
+   Volume 3: The Elly Kedward Tale          [Ritual Entertainment]
 */
 state("nocturne", "Rustin Parr")
 {
@@ -36,6 +37,8 @@ init
     var mms = modules.First().ModuleMemorySize;
     print("MMS: " + mms.ToString("X"));
 
+    // I'm not sure if other versions of each volume exist or could be used
+    // for running
     switch(mms)
     {
         case 0x28BF000: 
@@ -83,6 +86,8 @@ start
 
 isLoading
 {
+    // Does not count loads that load the main menu, this is a separate
+    // loading screen in all three games iirc
 	return current.isLoading;
 }
 
