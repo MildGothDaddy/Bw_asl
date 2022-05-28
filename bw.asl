@@ -1,5 +1,5 @@
 /* The Blair Witch Volumes are three games written in the same engine (Nocturne)
-   by three different developers. They all share a single page on speedrun.com.
+   by three different developers. They all share a single page on speedrun.com
    and were all released in 2000.
    Volume 1: Rustin Parr                    [Terminal Reality]
    Volume 2: The Legend of Coffin Rock      [Human Head Studios]
