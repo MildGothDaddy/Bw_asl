@@ -1,42 +1,93 @@
-state("nocturne")
+/* The Blair Witch Volumes are three games written in the same engine (Nocturne)
+   by three different developers. They all share a single page on speedrun.com.
+   Volume 1: Rustin Parr
+   Volume 2: The Legend of Coffin Rock
+   Volume 3: The Elly Kedward Tale
+*/
+state("nocturne", "Rustin Parr")
 {
-	string32 geo: "nocturne.exe", 0x1BCF258;
-	bool inGame: "nocturne.exe", 0x2899314;
+	string32 map: "nocturne.exe", 0x1BCF258;
+    
+    // All could be good candidates
+    bool isLoading: "nocturne.exe", 0x191BD28;
+    // bool isLoading: "nocturne.exe", 0x191BF4C;
+    // bool isLoading: "nocturne.exe", 0x191BF6C;
+    // bool isLoading: "nocturne.exe", 0x191C090;
+}
+
+state("blairwitch2", "Coffin Rock")
+{
+    // All could be good candidates (I believe these are the same values as in RP)
+    bool isLoading: "blairwitch2.exe", 0x190300C;
+    // bool isLoading: "blairwitch2.exe", 0x1903230;
+    // bool isLoading: "blairwitch2.exe", 0x1903250;
+    // bool isLoading: "blairwitch2.exe", 0x1903374; 
+}
+
+state("bw3", "Elly Kedward")
+{
+    bool isLoading: "bw3.exe", 0x1970AC4;
 }
 
 init 
 {
-    vars.StartMap = "CHECKINROOM.geo";
+    print("Nocturne game detected...");
+
+    var mms = modules.First().ModuleMemorySize;
+    print("MMS: " + mms.ToString("X"));
+
+    switch(mms)
+    {
+        case 0x28BF000: 
+            version = "Rustin Parr"; 
+            vars.StartMap = "CHECKINROOM.geo";
+            break;
+        case 0x22A1000:
+            version = "Coffin Rock";
+            break;
+        case 0x2945000:
+            version = "Elly Kedward";
+            break;
+        default:
+            version = "UNKNOWN";
+            break;
+    }
+
+    print("Game \"" + version + "\" detected.");
 }
 
 update 
 {
-    // Debug for testing when the map changes
-    if(current.geo != old.geo) {
-        print("PREVIOUS MAP: " + old.geo);
-        print("CURRENT MAP: " + current.geo);
-        print("");
+    if(version == "UNKNOWN") return;
+
+    // Debug for testing
+    if(version == "Rustin Parr" && current.map != old.map) 
+    {
+        print("map: " + old.map + " -> " + current.map);
+    }
+
+    if(old.isLoading != current.isLoading)
+    {
+        print("isLoading: " + old.isLoading + " -> " + current.isLoading);
     }
 }
 
 start 
 {
-	return current.geo != old.geo               // If the map has changed
-		&& current.geo == vars.StartMap;       // And the current map is the first map of the run
-}
-
-split 
-{
-	return current.geo != old.geo;              // Split when we change maps
+    if(version == "Rustin Parr")
+    {
+        return old.isLoading && !current.isLoading  // If we just finished loading
+            && current.map == vars.StartMap;        // and the current map is the first map of the run
+    }
 }
 
 isLoading
 {
-	return current.inGame == false;
+	return current.isLoading;
 }
 
 /*
-Map names:
+RUSTIN PARR Map names:
 Prologue
 CHECKINROOM (spawn room)
 HQBW (headquarters)
